@@ -30,8 +30,6 @@ int capture_init(void)
 
 int capture_prepare(struct capture *cap)
 {
-	int rc;
-
 	if (!(cap->pcap = pcap_open_dead(CAPTURE_LINKTYPE_LINUX_SLL2,
 					 UINT16_MAX))) {
 		fprintf(stderr, "pcap_open_dead: failed\n");
