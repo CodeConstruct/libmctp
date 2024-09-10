@@ -439,8 +439,9 @@ done:
 
 static inline bool mctp_ctrl_cmd_is_transport(struct mctp_ctrl_msg_hdr *hdr)
 {
-	return ((hdr->command_code >= MCTP_CTRL_CMD_FIRST_TRANSPORT) &&
-		(hdr->command_code <= MCTP_CTRL_CMD_LAST_TRANSPORT));
+	/* MCTP_CTRL_CMD_LAST_TRANSPORT=0xff so we omit comparing against that,
+	to avoid warnings about type limit comparison. */
+	return hdr->command_code >= MCTP_CTRL_CMD_FIRST_TRANSPORT;
 }
 
 static bool mctp_ctrl_handle_msg(struct mctp_bus *bus, mctp_eid_t src,
